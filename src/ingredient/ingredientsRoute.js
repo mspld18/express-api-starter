@@ -1,6 +1,6 @@
 const express = require('express');
 const { body, param } = require('express-validator');
-const ingredientController = require('../controllers/ingredientController');
+const ingredientController = require('./ingredientController');
 
 const router = express.Router();
 

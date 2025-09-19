@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const Ingredient = require('../entities/Ingredient'); // ton entity Ingredient
+const Ingredient = require('./ingredientEntity'); // ton entity Ingredient
 
 /**
  * CRUD Ingrédients – réponses HTTP propres

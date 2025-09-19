@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const Pizza = require('../entities/Pizza'); // ton entity adaptée
+const Pizza = require('./pizzaEntity'); // ton entity adaptée
 
 /**
  * CRUD Pizzas – avec champ ingredient
@@ -10,8 +10,8 @@ exports.create = async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
-        const { name, price, imageUrl, ingredient } = req.body;
-        const created = await Pizza.create({ name, price, imageUrl, ingredient });
+        const { name, ingredients, price, imageUrl,  } = req.body;
+        const created = await Pizza.create({ name, ingredients, price, imageUrl  });
         return res.status(201).json(created); // 201 Created
     } catch (err) {
         next(err);
@@ -49,8 +49,8 @@ exports.update = async (req, res, next) => {
         const id = Number(req.params.id);
         if (Number.isNaN(id)) return res.status(400).json({ error: 'Invalid pizza id' });
 
-        const { name, price, imageUrl, ingredient } = req.body;
-        const updated = await Pizza.update(id, { name, price, imageUrl, ingredient });
+        const { name, ingredients, price, imageUrl,  } = req.body;
+        const updated = await Pizza.update(id, { name, ingredients, price, imageUrl,  });
         if (!updated) return res.status(404).json({ error: 'Pizza not found' });
 
         return res.status(200).json(updated);

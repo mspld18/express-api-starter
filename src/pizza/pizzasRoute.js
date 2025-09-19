@@ -1,6 +1,6 @@
 const express = require('express');
 const { body, param } = require('express-validator');
-const pizzaController = require('../controllers/pizzaController');
+const pizzaController = require('./pizzaController');
 
 const router = express.Router();
 
@@ -23,9 +23,13 @@ const router = express.Router();
  *             required:
  *               - name
  *               - price
+ *               - ingredients
  *             properties:
  *               name:
  *                 type: string
+ *               ingredients:
+ *                 type: string
+ *                 example: "Tomate, Mozzarella, Basilic"
  *               price:
  *                 type: number
  *               imageUrl:
@@ -70,6 +74,9 @@ const router = express.Router();
  *             properties:
  *               name:
  *                 type: string
+ *               ingredients:
+ *                 type: string
+ *                 example: "Jambon, Champignons, Fromage"
  *               price:
  *                 type: number
  *               imageUrl:
@@ -96,11 +103,13 @@ const router = express.Router();
  *         description: Pizza not found
  */
 
+
 /**
  * Validation rules
  */
 const createAndUpdateValidations = [
     body('name').isString().notEmpty().withMessage('name is required'),
+    body('ingredients').isString().notEmpty().withMessage('ingredients is required'),
     body('price').isFloat({ gt: 0 }).withMessage('price must be a positive number'),
     body('imageUrl').optional().isString().isURL().withMessage('imageUrl must be a valid URL'),
 ];
