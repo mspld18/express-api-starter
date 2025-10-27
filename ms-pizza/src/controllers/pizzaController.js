@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const Pizza = require('./pizzaEntity'); // ton entity adaptée
+const Pizza = require('../entities/pizzaEntity'); // ton entity adaptée
 
 /**
  * CRUD Pizzas – avec champ ingredient
